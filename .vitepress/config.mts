@@ -15,13 +15,6 @@ export default defineConfig({
     ],
 
     sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/examples/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/examples/api-examples' }
-        ]
-      }
     ],
 
     socialLinks: [
