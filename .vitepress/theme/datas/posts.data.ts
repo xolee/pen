@@ -18,7 +18,7 @@ declare const data: Post[]
 export { data }
 
 export default createContentLoader('posts/*.md', {
-  excerpt: true,
+  // excerpt: true,
   transform(raw): Post[] {
     return raw
       .map(({ url, frontmatter }) => ({
@@ -26,7 +26,7 @@ export default createContentLoader('posts/*.md', {
         url,
         date: formatDate(frontmatter.date),
         excerpt: frontmatter.excerpt,
-        thumbnail: frontmatter.thumbnail ?? '/images/default_images.jpg',
+        thumbnail: frontmatter.thumbnail ? toWpLink(frontmatter.thumbnail) : '/images/default_images.jpg',
         type: frontmatter.type,
         tag: frontmatter.tag,
         category: frontmatter.category,
@@ -46,4 +46,12 @@ function formatDate(raw: string): Post['date'] {
       day: '2-digit',
     })
   }
+}
+
+function toWpLink(url: string): Post['thumbnail'] {
+  const { host, hostname, pathname, protocol } = new URL(url)
+  const isWpUrl = new RegExp(/^(i[1-3]\.wp\.com)$/).test(hostname)
+  console.log({ host, hostname, pathname, protocol, isWpUrl})
+  if (!isWpUrl) return `${protocol}//i2.wp.com/${host}${pathname}`
+  return url
 }
