@@ -51,7 +51,6 @@ function formatDate(raw: string): Post['date'] {
 function toWpLink(url: string): Post['thumbnail'] {
   const { host, hostname, pathname, protocol } = new URL(url)
   const isWpUrl = new RegExp(/^(i[1-3]\.wp\.com)$/).test(hostname)
-  console.log({ host, hostname, pathname, protocol, isWpUrl})
-  if (!isWpUrl) return `${protocol}//i2.wp.com/${host}${pathname}`
+  if (!isWpUrl) return `${protocol}//i${Math.floor(Math.random() * 3) + 1}.wp.com/${host}${pathname}`
   return url
 }
