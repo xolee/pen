@@ -2,7 +2,7 @@
 #
 # https://vitepress.dev/zh/guide/deploy#github-pages
 #
-name: Deploy Vitepress site to Pages
+name: Deploy to Github Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -27,6 +27,7 @@ concurrency:
 env:
   ROOT_PATH: "." # vitepress root directory. eg: .
   OUTDIR_PATH: "dist" # vitepress outDir configuration. eg: .vitepress/dist
+  BASE_PATH: "/pen/" # Github Pages repository configuration.
 
 jobs:
   build:
@@ -53,7 +54,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build with Vitepress
-        run: pnpm build
+        run: pnpm build --base ${{ env.BASE_PATH }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
