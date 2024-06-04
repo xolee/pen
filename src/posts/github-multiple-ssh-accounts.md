@@ -1,7 +1,7 @@
 ---
 title: 在一台电脑中配置多个账号 Github SSH 密钥
 date: 2024-04-19
-thumbnail: https://pic3.58cdn.com.cn/nowater/webim/big/n_v255b08658fd654e7a9db2c97371ef9d2f.jpg
+thumbnail: https://pic3.58cdn.com.cn/nowater/webim/big/n_v2511f226674b14662b176d151a32ad064.png
 excerpt: 配置多个 Github 账户 SSH 密钥，上传时自动验证并推送修改代码。
 tags:
   - Github
@@ -88,9 +88,9 @@ ssh-add C:\Users\Administrator/.ssh/id_ed25519_test
 
 ## 配置主机别名 {#ssh-host-config}
 
-配置 SSH Host 别名区分各自的账户
+在 `C:\Users\Administrator/.ssh/` 目录中新建 config 配置文件，增加下面代码配置 SSH Host 别名区分各自的账户
 
-```config
+```ssh
 Host demohost
   Hostname github.com
   IdentityFile=C:\Users\Administrator/.ssh/id_ed25519_demo
@@ -158,7 +158,7 @@ git@github.com:demo/demo-repo.git
 git@demohost:demo/demo-repo.git
 ```
 
-之后所有在本电脑上有关 Github 的操作命令，都需要使用 `git@diyname` 代替。
+之后所有在本电脑上有关 Github 的操作命令中的 `git@github.com` 都需要使用 `git@diyname` 代替。
 
 ## 参考文档 {#references}
 
