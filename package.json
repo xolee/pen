@@ -2,7 +2,7 @@
   "type": "module",
   "devDependencies": {
     "unocss": "^0.59.3",
-    "vitepress": "^1.1.0",
+    "vitepress": "^1.3.4",
     "vue": "^3.4.23"
   },
   "scripts": {
