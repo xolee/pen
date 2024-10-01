@@ -1,7 +1,7 @@
 ---
 title: 在一台电脑中配置多个账号 Github SSH 密钥
 date: 2024-04-19
-thumbnail: https://pic3.58cdn.com.cn/nowater/webim/big/n_v2511f226674b14662b176d151a32ad064.png
+thumbnail: https://pic3.58cdn.com.cn/nowater/webim/big/n_v2503e0ea0022e452193895b7532cc8fc6.png
 excerpt: 配置多个 Github 账户 SSH 密钥，上传时自动验证并推送修改代码。
 tags:
   - Github
@@ -10,7 +10,9 @@ tags:
 
 # {{ $frontmatter.title }}
 
-在一台电脑中配置多个 Github 账户 SSH 密钥，`git push` 上传时自动验证并推送修改代码。使用 `demo@domain.com` 和 `test@domain.com` 两个账号作为本次操作记录。
+在一台电脑中配置为多个 Github 账户生成 不同的 SSH 密钥，在进行 git 操作时，自动识别以及身份验证。
+
+使用 `demo@domain.com` 和 `test@domain.com` 两个账号作为本次操作记录。
 
 ## 创建本地密钥 {#generate-key}
 
@@ -68,19 +70,31 @@ The key's randomart image is:
 
 ## 添加密钥 {#add-key-to-ssh-agent}
 
-::: danger 省略该步骤操作
-在后面配置 SSH Host 后，可省略该步骤操作。我这里只作为记录。
-:::
+::: danger
 
 在向 ssh-agent 添加新的 SSH 密钥之前，确保 ssh-agent 正在运行或者手动启动。
 
 ```bash
 # ssh-agent 手动启动
+# 请在 PowerShell 中进行操作
 Get-Service -Name ssh-agent | Set-Service -StartupType Manual
 Start-Service ssh-agent
 ```
 
+:::
+
+
 ```bash
+# 添加密钥
+ssh-add C:\Users\Administrator/.ssh/id_ed25519_demo
+ssh-add C:\Users\Administrator/.ssh/id_ed25519_test
+```
+
+当出现 `Could not open a connection to your authentication agent.` 报错，请运行 `ssh-agent bash` 后，再次执行 `ssh-add` 命令。
+
+```bash
+ssh-agent bash
+
 # 添加密钥
 ssh-add C:\Users\Administrator/.ssh/id_ed25519_demo
 ssh-add C:\Users\Administrator/.ssh/id_ed25519_test
@@ -120,7 +134,13 @@ Host testhost
  "Github 账户添加 SSH 公钥") -->
 
 ```bash
-cat C:\Users\Administrator/.ssh/id_ed25519_demo
+# 通过 clip 命令直接复制文件内容
+clip < C:/Users/Administrator/.ssh/id_ed25519_demo.pub
+```
+
+```bash
+# 手动操作
+cat C:\Users\Administrator/.ssh/id_ed25519_demo.pub
 
 # 复制显示的内容或者本地打开复制
 SHA256:oYidentificationi2YIll9identificationMd82+M demo@domain.com
@@ -128,14 +148,24 @@ SHA256:oYidentificationi2YIll9identificationMd82+M demo@domain.com
 
 将上面复制的公钥文件内容添加保存到对应的 Github 账户中。
 
-<!-- ## 测试连接 {#github-test}
+## 测试 SSH 连接 {#ssh-test}
 
 ```bash
 ssh -T git@github.com
-Hi Demo! You've successfully authenticated, but GitHub does not provide shell access.
+
+# hostname
+# ssh -T git@diyname
+ssh -T git@demohost
+ssh -T git@testhost
 ```
 
-出现用户名称的话，证明连接成功，可以正常进行 git 操作即可。 -->
+出现用户名称的话，证明连接成功，可以正常进行 git 操作即可。
+
+如果提示 `Host key verification failed.` 可能是本地 `known_hosts` 文件内容导致，清空文件内容尝试一下。如果长时间操作的结果都是提示认证失败，可以查看 [github 权限被拒绝文档](https://docs.github.com/zh/authentication/troubleshooting-ssh/error-permission-denied-publickey)。
+
+::: tip
+仓库 SSH 链接也可以使用 hostname 的方式。具体操作可查看配置主机别名步骤，使用方法可查看下一步中的 diyname 名称的使用。
+:::
 
 ## 如何使用 {#usage}
 
