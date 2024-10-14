@@ -5,6 +5,7 @@ import UnoCSS from 'unocss/vite'
 export default defineConfig({
   title: "Pen",
   description: "A VitePress Site",
+  cleanUrls: true,
   srcDir: "./src",
   outDir: "./dist",
   themeConfig: {
