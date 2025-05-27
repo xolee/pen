@@ -2,20 +2,17 @@
 title: 如何使用 Cloudflare Worker & Pages 构建免费优质代理上网节点
 date: 2024-12-24 12:00:00
 thumbnail: https://pic1.58cdn.com.cn/nowater/webim/big/n_v2ff8781dbc05f415cab9509847aa956c5.png
-excerpt: 探讨如何使用 Cloudflare Worker & Pages 构建 edgetunnel 项目搭建免费、安全、快速的 vless 代理上网节点。
+excerpt: 探讨如何使用 Cloudflare Worker & Pages 搭建免费、安全、快速的 vless 代理上网节点。
 tags:
   - Free
   - Cloudflare
   - vless
   - v2ray
-  - v2rayN
 ---
 
 # {{ $frontmatter.title }}
 
-如何利用 Cloudflare Workers 并结合 V2RayN，自建一个高效、安全的网络代理节点？探讨如何不使用 VPS 服务器就可以科学上网。
-
-跟随一步步指导搭建 Cloudflare Workers & Pages 来构建服务，创建一个既快速又安全的个人网络节点。
+探讨如何不使用 VPS 服务器，免费利用 Cloudflare Workers & Pages 自建一个高效、安全的网络代理节点。
 
 ## 项目所需 {#base}
 
@@ -40,10 +37,6 @@ a73f1c81-18d2-490c-9c6a-aadac0edad7c
 
 === Output ===
 a73f1c81-18d2-490c-9c6a-aadac0edad7c
-```
-
-```shell [在线生成]
-https://www.baidu.com/s?wd=uuid%E7%94%9F%E6%88%90%E5%99%A8
 ```
 
 :::
