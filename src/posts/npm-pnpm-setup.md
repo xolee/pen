@@ -1,8 +1,8 @@
 ---
-title: PNPM 国内镜像源并自定义设置目录 
+title: NPM/PNPM 国内镜像源并自定义设置目录 
 date: 2025-05-27 10:00:00
 thumbnail: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/iorh6ftsaniq8afcuf34.png
-excerpt: PNPM 自定义设置目录。
+excerpt: NPM/PNPM 自定义设置目录。
 tags: 
   - PNPM
   - dev
@@ -16,22 +16,29 @@ tags:
 ::: code-group
 
 ```shell [阿里源]
+npm config set registry https://registry.npmmirror.com/
 pnpm config set registry https://registry.npmmirror.com/
 ```
 
-```shell [华为源]
-pnpm config set registry https://mirrors.huaweicloud.com/repository/npm/
-```
-
 ```shell [官方镜像源]
+npm config set registry https://registry.npmjs.org/
 pnpm config set registry https://registry.npmjs.org/
 ```
 
 :::
 
-## 自定义设置目录 {#set-dir}
+## 自定义设置 NPM 目录 {#npm-set-dir}
 
+```bash
+mkdir D:\AppData\npm\cache
+
+#npm config set prefix 'global dir'
+npm config set cache "D:\AppData\npm\cache"
 ```
+
+## 自定义设置 PNPM 目录 {#pnpm-set-dir}
+
+```shell
 mkdir D:\AppData\pnpm\store D:\AppData\pnpm\global D:\AppData\pnpm\global-bin D:\AppData\pnpm\state D:\AppData\pnpm\cache
 
 pnpm config set store-dir "D:\AppData\pnpm\store"             # pnpm 全局仓库路径（类似 .git 仓库）
