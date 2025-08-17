@@ -18,7 +18,7 @@ tags:
 ### 步骤 1: 下载全局依赖 {#global-step-install-dependencies}
 
 ```shell
-pnpm install -g cz-git commitizen
+pnpm add -g cz-git commitizen
 ```
 
 ### 步骤 2: 全局配置适配器类型 {#global-step-config-adapter}
@@ -26,12 +26,12 @@ pnpm install -g cz-git commitizen
 ::: code-group
 
 ```shell [Linux]
-echo '{ "path": "cz-git", "$schema": "https://cdn.jsdelivr.net/gh/Zhengqbbb/cz-git@1.7.1/docs/public/schema/cz-git.json" }' > ~/.czrc
+echo '{ "path": "cz-git", "$schema": "https://cdn.jsdelivr.net/gh/Zhengqbbb/cz-git@1.12.0/docs/public/schema/cz-git.json" }' > ~/.czrc
 ```
 
 ```shell [Windows]
 # %USERPROFILE% 为 Windows 系统下的用户目录，如 C:\Users\用户名
-echo { "path": "cz-git", "$schema": "https://cdn.jsdelivr.net/gh/Zhengqbbb/cz-git@1.7 .1/docs/public/schema/cz-git.json" } > %USERPROFILE%\.czrc
+echo { "path": "cz-git", "$schema": "https://cdn.jsdelivr.net/gh/Zhengqbbb/cz-git@1.12.0/docs/public/schema/cz-git.json" } > %USERPROFILE%\.czrc
 ```
 :::
 
@@ -61,7 +61,7 @@ echo { "path": "cz-git", "$schema": "https://cdn.jsdelivr.net/gh/Zhengqbbb/cz-gi
 ### 步骤 1: 下载依赖 {#project-step-install-dependencies}
 
 ```bash
-pnpm install -D cz-git commitizen
+pnpm add -D cz-git commitizen
 ```
 
 ### 步骤 2: 指定适配器 {#project-step-config-adapter}
