@@ -26,7 +26,7 @@ export default createContentLoader('posts/*.md', {
         url,
         date: formatDate(frontmatter.date),
         excerpt: frontmatter.excerpt,
-        thumbnail: frontmatter.thumbnail ? toWpLink(frontmatter.thumbnail) : '/images/default_images.jpg',
+        thumbnail: resolveThumbnail(frontmatter.thumbnail),
         type: frontmatter.type,
         tag: frontmatter.tag,
         category: frontmatter.category,
@@ -35,17 +35,24 @@ export default createContentLoader('posts/*.md', {
   }
 })
 
-function formatDate(raw: string): Post['date'] {
-  const date = new Date(raw) ?? '1970-01-01T00:00:00.000Z'
-  date.setUTCHours(24)
-  return {
-    time: +date,
-    string: date.toLocaleDateString('zh-CN', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    })
+function formatDate(raw: string | Date): Post['date'] {
+  const str = raw instanceof Date ? raw.toISOString() : String(raw ?? '')
+  const match = str.match(/(\d{4})-(\d{2})-(\d{2})/)
+  if (!match) {
+    return { time: 0, string: '1970-01-01' }
   }
+  const date = new Date(str)
+  return {
+    time: isNaN(date.getTime()) ? 0 : date.getTime(),
+    string: `${match[1]}-${match[2]}-${match[3]}`
+  }
+}
+
+function resolveThumbnail(thumbnail: string | undefined): Post['thumbnail'] {
+  const DEFAULT_THUMBNAIL = '/images/default_images.jpg'
+  if (!thumbnail) return DEFAULT_THUMBNAIL
+  if (thumbnail.startsWith('/')) return thumbnail
+  return toWpLink(thumbnail)
 }
 
 function toWpLink(url: string): Post['thumbnail'] {
