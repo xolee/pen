@@ -30,17 +30,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v6
 
-      - name: Install Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: 'pnpm'       # 明确启用 pnpm 缓存
-
       - name: Install pnpm
         uses: pnpm/action-setup@v6
         with:
           version: 10
           run_install: false  # 我们手动执行 install
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'pnpm'       # 明确启用 pnpm 缓存
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile  # CI 环境建议加 --frozen-lockfile
