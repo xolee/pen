@@ -1,7 +1,7 @@
 ---
 title: 中国境内开发环境镜像 Mirror 收集大全
 date: 2024-10-13 10:00:00
-thumbnail: https://img.erpweb.eu.org/imgs/2024/10/5d7b61fb9bc1c364.jpg
+thumbnail: /uploads/202410/chinamirror.jpg
 excerpt: 开发环境国内大厂镜像 Mirror 收集大全。
 tags: 
   - 软件
@@ -19,8 +19,11 @@ tags:
 # Cloudflare Packagist 镜像站
 https://packagist.pages.dev/
 
-# npm 镜像
+# npm 阿里镜像
 https://registry.npmmirror.com
+
+# npm 官方镜像
+https://registry.npmjs.org/
 ```
 
 :::
@@ -41,6 +44,14 @@ composer config -g --unset repos.packagist
 
 # 清除缓存
 composer clear-cache
+
+# 设置缓存目录
+mkdir D:/AppData/Composer/files D:/AppData/Composer/repo D:/AppData/Composer/vcs D:/AppData/Composer/data 
+composer config -g cache-dir D:/AppData/Composer
+composer config -g cache-files-dir D:/AppData/Composer/files
+composer config -g cache-repo-dir D:/AppData/Composer/repo
+composer config -g cache-vcs-dir D:/AppData/Composer/vcs
+composer config -g data-dir D:/AppData/Composer/data
 ```
 
 项目配置

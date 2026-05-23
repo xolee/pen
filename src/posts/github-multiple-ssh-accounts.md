@@ -1,11 +1,13 @@
 ---
 title: 在一台电脑中配置多个账号 Github SSH 密钥
-date: 2024-04-19
-thumbnail: https://pic3.58cdn.com.cn/nowater/webim/big/n_v2503e0ea0022e452193895b7532cc8fc6.png
-excerpt: 配置多个 Github 账户 SSH 密钥，上传时自动验证并推送修改代码。
+date: 2024-04-19 10:00:00
+thumbnail: /uploads/202410/github-multiple-ssh-accounts.png
+excerpt: 在一台电脑为多个 Github 账户配置独立的 SSH 密钥，通过 SSH Host 别名实现自动身份验证，解决多账号开发的权限隔离问题。
 tags:
   - Github
   - SSH
+  - Git
+  - 开发环境配置
 ---
 
 # {{ $frontmatter.title }}
@@ -20,7 +22,7 @@ tags:
 
 ::: code-group
 
-```bash [demo 账户]
+```bash [demo 账户] {4-5,7,10-11}
 # 创建密钥
 > ssh-keygen -t ed25519 -C "demo@domain.com"
 Generating public/private ed25519 key pair.
@@ -43,7 +45,7 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-```bash [test 账户]
+```bash [test 账户] {4-5,7,10-11}
 # 创建密钥
 > ssh-keygen -t ed25519 -C "test@domain.com"
 Generating public/private ed25519 key pair.
@@ -102,7 +104,7 @@ ssh-add C:\Users\Administrator/.ssh/id_ed25519_test
 
 ## 配置主机别名 {#ssh-host-config}
 
-在 `C:\Users\Administrator/.ssh/` 目录中新建 config 配置文件，增加下面代码配置 SSH Host 别名区分各自的账户
+在 `C:\Users\Administrator/.ssh/` 目录中新建 config 配置文件（通常为 .ssh/config），增加下面代码配置 SSH Host 别名区分各自的账户
 
 ```ssh
 Host demohost
@@ -129,9 +131,6 @@ Host testhost
 ## 添加公钥 {#add-pub-key}
 
 登录 Github 账户，在 `Setting` > `SSH and GPG keys` 选项中添加本地以 `.pub` 结尾的公钥文件内容。
-
-<!-- ![Github 账户添加 SSH 公钥](https://docs.github.com/assets/cb-45016/images/help/settings/userbar-account-settings-global-nav-update.png
- "Github 账户添加 SSH 公钥") -->
 
 ```bash
 # 通过 clip 命令直接复制文件内容

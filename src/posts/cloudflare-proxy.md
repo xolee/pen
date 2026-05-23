@@ -1,7 +1,7 @@
 ---
 title: 如何使用 Cloudflare Worker & Pages 构建免费优质代理上网节点
 date: 2024-12-24 12:00:00
-thumbnail: https://pic1.58cdn.com.cn/nowater/webim/big/n_v2ff8781dbc05f415cab9509847aa956c5.png
+thumbnail: /uploads/202410/cover-image-cloudflare-proxy.png
 excerpt: 探讨如何使用 Cloudflare Worker & Pages 搭建免费、安全、快速的 vless 代理上网节点。
 tags:
   - Free

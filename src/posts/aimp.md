@@ -1,7 +1,7 @@
 ---
 title: AIMP 播放器手册
 date: 2024-10-03 08:00:00
-thumbnail: https://pic3.58cdn.com.cn/nowater/webim/big/n_v22f9c3b031920464689993cc0cb12e4a6.jpg
+thumbnail: /uploads/202410/amip.jpg
 excerpt: AIMP 播放器设置以及皮肤、插件记录手册。
 tags: 
   - Windows

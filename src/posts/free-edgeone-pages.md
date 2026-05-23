@@ -1,7 +1,7 @@
 ---
 title: 免费白嫖腾讯 EdgeOne Pages 服务构建 VitePress 站点
 date: 2024-11-24 12:00:00
-thumbnail: https://pic2.58cdn.com.cn/nowater/webim/big/n_v2b1dfdafbe5094a92a6bdd33a1ffb43fd.jpg
+thumbnail: /uploads/202410/free-edgeone-pages-thumb.jpg
 excerpt: 配置 EdgeOne Pages 服务快速构建、部署静态 VitePress 站点
 tags:
   - Free
@@ -23,8 +23,6 @@ EdgeOne 国际站点：https://edgeone.ai/
 
 :::
 
-[![EdgeOne Pages 管理菜单](https://pic8.58cdn.com.cn/nowater/webim/big/n_v284e623edba1e42449dec6af04168cf22.png)](https://pic8.58cdn.com.cn/nowater/webim/big/n_v284e623edba1e42449dec6af04168cf22.png)
-
 ## 仓库授权 {#authorization}
 
 进入 Pages 管理页面，按照提示登录 Github 账号，授权仓库权限，我这里是只授权了部署项目仓库的权限。
@@ -33,7 +31,8 @@ EdgeOne 国际站点：https://edgeone.ai/
 
 授权过后，会显示对应权限的仓库，点击要部署的仓库，进行相关部署设置即可。
 
-[![EdgeOne Pages 项目部署设置](https://pic8.58cdn.com.cn/nowater/webim/big/n_v24a798d76d2b6437eadb21341293e23a0.png)](https://pic8.58cdn.com.cn/nowater/webim/big/n_v24a798d76d2b6437eadb21341293e23a0.png)
+
+[![EdgeOne Pages 管理菜单](/uploads/202410/free-edgeone-pages-deployments.png)](/uploads/202410/free-edgeone-pages-deployments.png)
 
 部署命令跟本地测试一样，如果命令有错误，后面也可以在项目设置中进行修改。
 
@@ -43,7 +42,7 @@ EdgeOne 国际站点：https://edgeone.ai/
 
 我们可以在项目设置中，增加自定义域名，前提得要有备案。根据相应提示添加 CNAME 解析，然后在面板进行验证，验证通过后，腾讯会自动生成绑定域名相对应的证书。
 
-[![EdgeOne Pages 添加自定义域名](https://pic2.58cdn.com.cn/nowater/webim/big/n_v28971981f0e004309915fc82eb616185a.png)](https://pic2.58cdn.com.cn/nowater/webim/big/n_v28971981f0e004309915fc82eb616185a.png)
+[![EdgeOne Pages 添加自定义域名](/uploads/202410/free-edgeone-pages-settings.png)](/uploads/202410/free-edgeone-pages-settings.png)
 
 ## 效果 {#results}
 
