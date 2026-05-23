@@ -1,73 +1,73 @@
-# Sample workflow for building and deploying an Astro site to GitHub Pages
-#
+# Sample workflow for building and deploying a VitePress site to GitHub Pages
 # https://vitepress.dev/zh/guide/deploy#github-pages
-#
+
 name: Deploy to Github Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: ["master"]     # 仓库分支
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 env:
-  ROOT_PATH: "." # vitepress root directory. eg: .
-  OUTDIR_PATH: "dist" # vitepress outDir configuration. eg: .vitepress/dist
-  BASE_PATH: "/pen/" # Github Pages repository configuration.
+  ROOT_PATH: "."          # 项目根目录
+  OUTDIR_PATH: "dist"     # 构建输出目录（与 VitePress outDir 配置保持一致）
+  BASE_PATH: "/pen/"      # GitHub Pages 仓库子路径
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
         with:
-          fetch-depth: 0
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+          node-version: 24
+          cache: 'pnpm'       # 明确启用 pnpm 缓存
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
         with:
-          version: latest
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24.x"
-          cache: pnpm
-          cache-dependency-path: ${{ env.ROOT_PATH }}/pnpm-lock.yaml
+          version: 10
+          run_install: false  # 我们手动执行 install
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile  # CI 环境建议加 --frozen-lockfile
+
+      - name: Approve build scripts (auto)
+        run: pnpm approve-builds --all
+
+      - name: Build with VitePress
+        run: pnpm build --base ${{ env.BASE_PATH }}
+      
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
-      - name: Install dependencies
-        run: pnpm install
-      - name: Build with Vitepress
-        run: pnpm build --base ${{ env.BASE_PATH }}
+        uses: actions/configure-pages@v6
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ${{ env.ROOT_PATH }}/${{ env.OUTDIR_PATH }}
 
   deploy:
+    name: Deploy
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
     runs-on: ubuntu-latest
-    name: Deploy
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
